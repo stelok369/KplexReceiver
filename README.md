@@ -22,7 +22,9 @@ along with KplexReceiver. If not, see <http://www.gnu.org/licenses/>.
 ![Structure](/docs/struct_en.png?raw=true "Structure")
 
 ### Usage
-1. Build with your favorit Java build system. You should use Java 8 system lib and ReactiveServer lib from https://github.com/stelok369/ReactiveServer
-2. Install kplex from https://github.com/stripydog/kplex, config it for output NMEA0183 to stdout. Kplex should be in PATH
-3. Wisit App's machine IP from browser. Firefox ang Chrome somehow working, other not tested.
-4. Study web interface page scripts to write your telemetry app.
+1. Create writable directory /home/kplex_logs or change BASE_PATH in src/kplex_receiver/NmeaStorage.java
+2. By default KplexReciver use TCP:80, on linux this port accesible only under root, so ether run KplexReciver under root (bad) or configure forwarding or change port to another > 1024 in src/kplex_reciver/Main.java.
+3. Build with your favorit Java build system. You should use Java 8 system lib and ReactiveServer lib from https://github.com/stelok369/ReactiveServer
+4. Install kplex from https://github.com/stripydog/kplex, config it for output NMEA0183 to stdout. Kplex should be in PATH
+5. Wisit App machine IP from browser. Firefox ang Chrome somehow working, other not tested.
+6. Study web interface page scripts to write your telemetry app.

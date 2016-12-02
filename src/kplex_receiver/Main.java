@@ -3,20 +3,20 @@
 ** Copyright (C) 2016 Smoliy Artem                                         **
 ** Contact: strelok369@yandex.ru                                           **
 **                                                                         **
-** This file is part of KplexReceiver.                                      **
+** This file is part of KplexReceiver.                                     **
 **                                                                         **
-** KplexReceiver is free software: you can redistribute it and/or modify    **
+** KplexReceiver is free software: you can redistribute it and/or modify   **
 ** it under the terms of the GNU General Public License as published by    **
 ** the Free Software Foundation, either version 3 of the License, or       **
 ** (at your option) any later version.                                     **
 **                                                                         **
-** KplexReceiver is distributed in the hope that it will be useful,         **
+** KplexReceiver is distributed in the hope that it will be useful,        **
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of          **
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the            **
 ** GNU General Public License for more details.                            **
-**                                                                         **
+**                           			                                   **
 ** You should have received a copy of the GNU General Public License       **
-** along with KplexReceiver. If not, see <http://www.gnu.org/licenses/>.    **
+** along with KplexReceiver. If not, see <http://www.gnu.org/licenses/>.   **
 **                                                                         **
 *****************************************************************************/
 
@@ -60,10 +60,10 @@ public class Main
 		HTTPReactiveServer server = new HTTPReactiveServer("0.0.0.0", 80, 1);
 		server.setContentProvider(new ContentProvider());
 						
-		server.getContentProvider().addContentFromResource("/",           "web_content/index.html", ContentType.CT_TXT_HTML);
-		server.getContentProvider().addContentFromResource("/index.css",  "web_content/index.css",  ContentType.CT_TXT_CSS);
-		server.getContentProvider().addContentFromResource("/jScroll.js", "web_content/jScroll.js", ContentType.CT_APP_JS);
-		server.getContentProvider().addContentFromResource("/dataReceiver.js", "web_content/dataReceiver.js", ContentType.CT_APP_JS);
+		server.getContentProvider().addContentFromResource("/",           "/web_content/index.html", ContentType.CT_TXT_HTML);
+		server.getContentProvider().addContentFromResource("/index.css",  "/web_content/index.css",  ContentType.CT_TXT_CSS);
+		server.getContentProvider().addContentFromResource("/jScroll.js", "/web_content/jScroll.js", ContentType.CT_APP_JS);
+		server.getContentProvider().addContentFromResource("/dataReceiver.js", "/web_content/dataReceiver.js", ContentType.CT_APP_JS);
 		
 		NmeaDataWebSocket nmeaData = new NmeaDataWebSocket();
 		StatusWebSocket nmeaStatus = new StatusWebSocket();
