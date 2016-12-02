@@ -26,5 +26,5 @@ along with KplexReceiver. If not, see <http://www.gnu.org/licenses/>.
 2. By default KplexReciver use TCP:80, on linux this port accessible only under root, so ether run KplexReciver under root (bad) or configure forwarding or change port to another > 1024 in src/kplex_reciver/Main.java.
 3. Build with your favourite Java build system. You should add Java 8 system lib and ReactiveServer lib from https://github.com/stelok369/ReactiveServer
 4. Install kplex from https://github.com/stripydog/kplex, config it for output NMEA0183 to stdout. Kplex should be in PATH
-5. Start KplexReceiver abd wisit App machine IP from browser. Firefox ang Chrome somehow working, other not tested.
+5. Start KplexReceiver and wisit App machine IP from browser. Firefox ang Chrome somehow working, other not tested.
 6. Study web interface page scripts to write your telemetry app.
