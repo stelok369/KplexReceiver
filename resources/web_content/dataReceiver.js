@@ -3,25 +3,25 @@
 ** Copyright (C) 2016 Smoliy Artem                                         **
 ** Contact: strelok369@yandex.ru                                           **
 **                                                                         **
-** This file is part of KplexReciver.                                      **
+** This file is part of KplexReceiver.                                      **
 **                                                                         **
-** KplexReciver is free software: you can redistribute it and/or modify    **
+** KplexReceiver is free software: you can redistribute it and/or modify    **
 ** it under the terms of the GNU General Public License as published by    **
 ** the Free Software Foundation, either version 3 of the License, or       **
 ** (at your option) any later version.                                     **
 **                                                                         **
-** KplexReciver is distributed in the hope that it will be useful,         **
+** KplexReceiver is distributed in the hope that it will be useful,         **
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of          **
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the            **
 ** GNU General Public License for more details.                            **
 **                                                                         **
 ** You should have received a copy of the GNU General Public License       **
-** along with KplexReciver. If not, see <http://www.gnu.org/licenses/>.    **
+** along with KplexReceiver. If not, see <http://www.gnu.org/licenses/>.    **
 **                                                                         **
 *****************************************************************************/
 
-var dataReciver;
-function dataReciverInit()
+var dataReceiver;
+function dataReceiverInit()
 {
 	var dataIframe = document.getElementById("dataIframe");
 	var down = document.getElementById("dataToBottom");
@@ -33,10 +33,10 @@ function dataReciverInit()
 	var statusIframe = document.getElementById("statusIframe");
 	var statusCloseButton = document.getElementById("statusCloseButton");
 	
-	dataReciver = new DataReciver(dataIframe, down, clear, timeField, overlay, statusPanel, statusIframe, statusCloseButton);
+	dataReceiver = new DataReceiver(dataIframe, down, clear, timeField, overlay, statusPanel, statusIframe, statusCloseButton);
 }
 
-function DataReciver(dataIframe, down, clear, timeField, overlay, statusPanel, statusIframe, statusCloseButton)
+function DataReceiver(dataIframe, down, clear, timeField, overlay, statusPanel, statusIframe, statusCloseButton)
 {
 	this.dataScroll = new JScroll(dataIframe, 16, 20, 2, "vScroll", "vScrollBar", "hScroll", "hScrollBar");	
 	this.dataIframe = dataIframe;
@@ -176,19 +176,19 @@ function DataReciver(dataIframe, down, clear, timeField, overlay, statusPanel, s
 	this.updateStatus();
 }
 
-DataReciver.prototype.onClear = function()
+DataReceiver.prototype.onClear = function()
 {
 	this.doc.body.innerHTML = "";
 }
 
 /*****************************TIME********************************/
-DataReciver.prototype.connectTime = function()
+DataReceiver.prototype.connectTime = function()
 {
 	this.timeSocket = new WebSocket(this.websocketBase+"/status");
 	this.timeSocket.onclose = this.onTimeError.bind(this);
 	this.timeSocket.onmessage = this.onTimeMessage.bind(this);
 }
-DataReciver.prototype.onTimeError = function(event)
+DataReceiver.prototype.onTimeError = function(event)
 {
 	this.timeOk = false;
 	this.updateStatus();
@@ -199,7 +199,7 @@ DataReciver.prototype.onTimeError = function(event)
 	this.kplexOk = false;
 	this.kplexStatus = "Unknown";
 }
-DataReciver.prototype.onTimeMessage = function(event)
+DataReceiver.prototype.onTimeMessage = function(event)
 {
 	var msg = event.data+"";
 	
@@ -252,32 +252,32 @@ DataReciver.prototype.onTimeMessage = function(event)
 /*****************************TIME********************************/
 
 /*****************************DATA********************************/
-DataReciver.prototype.connectData = function()
+DataReceiver.prototype.connectData = function()
 {
 	this.dataSocket = new WebSocket(this.websocketBase+"/data");
 	this.dataSocket.onopen = this.onDataOpen.bind(this);
 	this.dataSocket.onclose = this.onDataError.bind(this);
 	this.dataSocket.onmessage = this.onDataMessage.bind(this);
 }
-DataReciver.prototype.onDataOpen = function()
+DataReceiver.prototype.onDataOpen = function()
 {
 	this.dataOk = true;
 	this.dataStatus = "OK";
 	this.updateStatus();
 }
-DataReciver.prototype.onDataError = function(event)
+DataReceiver.prototype.onDataError = function(event)
 {
 	this.dataOk = false;
 	this.dataStatus = "Connection Lost";
 	this.updateStatus();
 	setTimeout((function(){this.connectData();}).bind(this),1000);
 }
-DataReciver.prototype.onDataMessage = function(event)
+DataReceiver.prototype.onDataMessage = function(event)
 {
 	var str = ""+event.data;	
 	this.pushMessage(str);
 }
-DataReciver.prototype.pushMessage = function(msg)
+DataReceiver.prototype.pushMessage = function(msg)
 {
 	if(msg.length === 0)
 		return;
@@ -319,7 +319,7 @@ DataReciver.prototype.pushMessage = function(msg)
 /*****************************DATA********************************/
 
 /*****************************STATUS******************************/
-DataReciver.prototype.updateStatus = function()
+DataReceiver.prototype.updateStatus = function()
 {	
 	var ok = (this.dataOk && this.kplexOk && this.timeOk);
 	
@@ -350,7 +350,7 @@ DataReciver.prototype.updateStatus = function()
 	refreshEntry(this.statusData,   this.dataOk,  this.dataStatus);
 	refreshEntry(this.statusKplex,  this.kplexOk, this.kplexStatus);
 }
-DataReciver.prototype.showStatus = function()
+DataReceiver.prototype.showStatus = function()
 {
 	this.overlay.style.display = "block";
 	setTimeout((function()
@@ -359,7 +359,7 @@ DataReciver.prototype.showStatus = function()
 		setTimeout((function(){this.statusPanel.style.top = "0";}).bind(this),500);
 	}).bind(this),50);
 }
-DataReciver.prototype.hideStatus = function()
+DataReceiver.prototype.hideStatus = function()
 {
 	this.statusPanel.style.top = "-100%";
 	setTimeout((function()

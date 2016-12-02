@@ -3,24 +3,24 @@
 ** Copyright (C) 2016 Smoliy Artem                                         **
 ** Contact: strelok369@yandex.ru                                           **
 **                                                                         **
-** This file is part of KplexReciver.                                      **
+** This file is part of KplexReceiver.                                      **
 **                                                                         **
-** KplexReciver is free software: you can redistribute it and/or modify    **
+** KplexReceiver is free software: you can redistribute it and/or modify    **
 ** it under the terms of the GNU General Public License as published by    **
 ** the Free Software Foundation, either version 3 of the License, or       **
 ** (at your option) any later version.                                     **
 **                                                                         **
-** KplexReciver is distributed in the hope that it will be useful,         **
+** KplexReceiver is distributed in the hope that it will be useful,         **
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of          **
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the            **
 ** GNU General Public License for more details.                            **
 **                                                                         **
 ** You should have received a copy of the GNU General Public License       **
-** along with KplexReciver. If not, see <http://www.gnu.org/licenses/>.    **
+** along with KplexReceiver. If not, see <http://www.gnu.org/licenses/>.    **
 **                                                                         **
 *****************************************************************************/
 
-package kplex_reciver;
+package kplex_receiver;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -38,10 +38,10 @@ import reactive_server.http_server.http.HttpResponse;
 
 public class TimeSetterProcessor extends HttpProcessor
 {
-	private KplexReciver reciver;
-	public TimeSetterProcessor(KplexReciver reciver)
+	private KplexReceiver receiver;
+	public TimeSetterProcessor(KplexReceiver receiver)
 	{
-		this.reciver = reciver;
+		this.receiver = receiver;
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class TimeSetterProcessor extends HttpProcessor
 			if(reader.readLine() != null)
 				throw new Exception();
 			
-			reciver.restart();
+			receiver.restart();
 			return constructStatus(HTTPStatus.ST200, request);
 		}
 		catch (Exception e)

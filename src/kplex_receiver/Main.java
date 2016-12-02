@@ -3,31 +3,32 @@
 ** Copyright (C) 2016 Smoliy Artem                                         **
 ** Contact: strelok369@yandex.ru                                           **
 **                                                                         **
-** This file is part of KplexReciver.                                      **
+** This file is part of KplexReceiver.                                      **
 **                                                                         **
-** KplexReciver is free software: you can redistribute it and/or modify    **
+** KplexReceiver is free software: you can redistribute it and/or modify    **
 ** it under the terms of the GNU General Public License as published by    **
 ** the Free Software Foundation, either version 3 of the License, or       **
 ** (at your option) any later version.                                     **
 **                                                                         **
-** KplexReciver is distributed in the hope that it will be useful,         **
+** KplexReceiver is distributed in the hope that it will be useful,         **
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of          **
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the            **
 ** GNU General Public License for more details.                            **
 **                                                                         **
 ** You should have received a copy of the GNU General Public License       **
-** along with KplexReciver. If not, see <http://www.gnu.org/licenses/>.    **
+** along with KplexReceiver. If not, see <http://www.gnu.org/licenses/>.    **
 **                                                                         **
 *****************************************************************************/
 
-package kplex_reciver;
+package kplex_receiver;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import kplex_reciver.KplexReciver.KplexMessageListener;
-import kplex_reciver.KplexReciver.KplexStatus;
-import kplex_reciver.KplexReciver.KplexStatusListener;
+
+import kplex_receiver.KplexReceiver.KplexMessageListener;
+import kplex_receiver.KplexReceiver.KplexStatus;
+import kplex_receiver.KplexReceiver.KplexStatusListener;
 import reactive_server.http_server.HTTPReactiveServer;
 import reactive_server.http_server.Utils;
 import reactive_server.http_server.content.ContentProvider;
@@ -35,7 +36,7 @@ import reactive_server.http_server.http.ContentType;
 
 public class Main
 {
-	private static class NmeaReciverTest implements KplexMessageListener
+	private static class NmeaReceiverTest implements KplexMessageListener
 	{
 		@Override
 		public void onMessage(NmeaMessage msg)
@@ -62,7 +63,7 @@ public class Main
 		server.getContentProvider().addContentFromResource("/",           "web_content/index.html", ContentType.CT_TXT_HTML);
 		server.getContentProvider().addContentFromResource("/index.css",  "web_content/index.css",  ContentType.CT_TXT_CSS);
 		server.getContentProvider().addContentFromResource("/jScroll.js", "web_content/jScroll.js", ContentType.CT_APP_JS);
-		server.getContentProvider().addContentFromResource("/dataReciver.js", "web_content/dataReciver.js", ContentType.CT_APP_JS);
+		server.getContentProvider().addContentFromResource("/dataReceiver.js", "web_content/dataReceiver.js", ContentType.CT_APP_JS);
 		
 		NmeaDataWebSocket nmeaData = new NmeaDataWebSocket();
 		StatusWebSocket nmeaStatus = new StatusWebSocket();
@@ -72,14 +73,14 @@ public class Main
 		NmeaStorage storage = new NmeaStorage();
 		server.getContentProvider().addContent("/last",	new LastMessagesProcessor(storage));
 		
-		KplexReciver reciver = new KplexReciver();
-		reciver.registerMessageListener(nmeaData);
-		reciver.registerMessageListener(storage);
-		reciver.registerMessageListener(new NmeaReciverTest());
-		reciver.registerStatusListener(nmeaStatus);
-		reciver.registerStatusListener(new NmeaStatusTest());
+		KplexReceiver receiver = new KplexReceiver();
+		receiver.registerMessageListener(nmeaData);
+		receiver.registerMessageListener(storage);
+		receiver.registerMessageListener(new NmeaReceiverTest());
+		receiver.registerStatusListener(nmeaStatus);
+		receiver.registerStatusListener(new NmeaStatusTest());
 		
-		TimeSetterProcessor timeSetter = new TimeSetterProcessor(reciver);
+		TimeSetterProcessor timeSetter = new TimeSetterProcessor(receiver);
 		server.getContentProvider().addContent("/settime", timeSetter);
 		
 		server.start();
