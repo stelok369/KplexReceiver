@@ -1,0 +1,251 @@
+/****************************************************************************
+**                                                                         **
+** Copyright (C) 2016 Smoliy Artem                                         **
+** Contact: strelok369@yandex.ru                                           **
+**                                                                         **
+** This file is part of KplexReciver.                                      **
+**                                                                         **
+** KplexReciver is free software: you can redistribute it and/or modify    **
+** it under the terms of the GNU General Public License as published by    **
+** the Free Software Foundation, either version 3 of the License, or       **
+** (at your option) any later version.                                     **
+**                                                                         **
+** KplexReciver is distributed in the hope that it will be useful,         **
+** but WITHOUT ANY WARRANTY; without even the implied warranty of          **
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the            **
+** GNU General Public License for more details.                            **
+**                                                                         **
+** You should have received a copy of the GNU General Public License       **
+** along with KplexReciver. If not, see <http://www.gnu.org/licenses/>.    **
+**                                                                         **
+*****************************************************************************/
+
+@CHARSET "UTF-8";
+
+body, html
+{
+	position: absolute;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	color: #ddd;
+	background-color: #333;
+	cursor: default;
+	font-family: sans-serif;
+	
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+input[type="button"]{ border:none; border: 0; color: #ddd;}
+input[type="button"]:disabled{color: #555;}
+input[type="button"]::-moz-focus-inner {border: 0;}
+
+input[type=radio],
+input[type=checkbox]
+{
+	display: none;
+}
+
+label.CatSwitch,
+label.PannelCheckbox,
+.PannelButton
+{
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+	vertical-align: middle;	
+	border-radius: 5px;
+	
+	color: #ddd;
+	font-family: sans-serif;
+	font-size: 14px;
+}
+label.CatSwitch
+{
+	width: 100%;
+	background-color: #555;
+}
+input[type="radio"]:hover+label.CatSwitch
+{
+	background-color: #656565;
+}
+input[type="radio"]:checked+label.CatSwitch
+{
+	background-color: #3b3b3b;
+}
+input[type="radio"]+label.CatSwitch+input[type="radio"]+label.CatSwitch
+{
+	margin-top: 15px;
+}
+
+label.PannelCheckbox
+{
+	width: 150px;
+	background-color: #5a5a5a;
+}
+input[type="checkbox"]:hover+label.PannelCheckbox
+{
+	background-color: #777;
+}
+input[type="checkbox"]:checked+label.PannelCheckbox
+{
+	background-color: #444;
+}
+
+.PannelButton
+{
+	width: 150px;
+	background-color: #5a5a5a;
+}
+.PannelButton:hover
+{
+	background-color: #777;
+}
+.PannelButton:hover:active
+{
+	background-color: #444;
+}
+
+/*****************PANELS********************/
+.LeftPanel
+{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 100%;
+	width: 150px;
+	background-color: #222;
+}
+
+.RightPanel
+{
+	position: absolute;
+	left: 150px;
+	top: 0px;
+	right: 0px;
+	height: 100%;
+	/*background-color: #500;*/
+}
+
+.PanelContainer
+{
+	/*padding: 15px;*/
+	margin: 15px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.RightPanelChanger
+{
+	position: absolute;
+	/*display: none;*/
+	left: 100%;
+	top: 0px;
+	height: 100%;
+	width: 100%;
+	/*background-color: #050;*/
+	transition: left 0.3s, opacity 0.5s;
+}
+
+.PanelPanel,
+.TimePanel
+{
+	border-radius: 7px;
+	background-color: #222;
+}
+.TimePanel
+{
+	height: 35px;
+	line-height: 35px;
+	padding-left: 1em;
+	padding-right: 1em;
+	text-align: center;
+	vertical-align: middle;
+	font-family: monospace;
+	font-size: 16px;
+	overflow: hidden;
+}
+
+.StatusPanel
+{
+	background-color: #333;
+	border-radius: 7px;
+	overflow: hidden;
+}
+
+.Overlay
+{
+	position: absolute;	
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+	display: none;
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+/*****************PANELS********************/
+
+/***************SCROLL_BARS*****************/
+.vScroll,
+.hScroll
+{
+	position: absolute;
+	background-color: #111;
+}
+.vScrollBar,
+.hScrollBar
+{
+	position: absolute;
+	background-color: #444;
+}
+.vScroll
+{
+	right: 0; top: 0;
+	width: 12px;
+	border-radius: 20px 20px 20px 20px;
+}
+.vScroll:hover,
+.vScroll:active
+{
+	width: 20px;
+}
+.vScrollBar
+{
+	left: 2px; right: 2px; top: 2px;
+	height: 20px;
+	border-radius: 20px;	
+}
+.hScroll
+{
+	bottom: 0; left: 0;
+	height: 12px;
+	border-radius: 20px 20px 20px 20px;
+}
+.hScroll:hover,
+.hScroll:active
+{
+	height: 20px;
+}
+.hScrollBar
+{
+	left: 2px; bottom: 2px; top: 2px;
+	width: 20px;
+	border-radius: 20px;	
+}
+/***************SCROLL_BARS*****************/
+
+.StatusLabel:hover
+{
+	text-decoration: underline;
+	cursor: pointer;
+}
