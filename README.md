@@ -1,8 +1,7 @@
 # KplexReciver
 App to recive NMEA0183 data from kplex and provide websocket interface
 
-Copyright (C) 2016 Smoliy Artem
-Contact: strelok369@yandex.ru
+Copyright (C) 2016 Smoliy Artem<br>Contact: strelok369@yandex.ru
 
 KplexReciver is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -20,7 +19,7 @@ along with KplexReciver. If not, see <http://www.gnu.org/licenses/>.
 - status websocket
 
 ### System structure
-![Structure](/docs/struct_en.svg?raw=true "Structure")
+![Structure](/docs/struct_en.png?raw=true "Structure")
 
 ### Usage
 1. Build with your favorit Java build system. You should use Java 8 system lib and ReactiveServer lib from https://github.com/stelok369/ReactiveServer
